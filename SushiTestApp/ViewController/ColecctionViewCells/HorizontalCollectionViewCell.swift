@@ -60,10 +60,10 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
             imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6),
             
             nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor), // Центрируем nameLabel по горизонтали
+            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             subMenuCountLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 15),
-            subMenuCountLabel.centerXAnchor.constraint(equalTo: centerXAnchor), // Центрируем subMenuCountLabel по горизонтали
+            subMenuCountLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 

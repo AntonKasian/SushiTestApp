@@ -34,6 +34,8 @@ class CategoryApiCaller {
                 let response = try decoder.decode(CategoryResponse.self, from: data)
                 let categories = response.menuList
                 completion(.success(categories))
+                
+                print(data)
             } catch {
                 completion(.failure(error))
             }
