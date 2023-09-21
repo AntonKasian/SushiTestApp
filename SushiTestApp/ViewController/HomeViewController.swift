@@ -12,6 +12,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     
     let backColor = #colorLiteral(red: 0.1411764324, green: 0.1411764324, blue: 0.1411764324, alpha: 1)
     
+    var categories: [Category] = []
+
+    
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -27,6 +31,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         setupViews()
         setupNavigationBar()
         setupRightBarButton()
+        
+        CategoryApiCaller.shared.getCategories { result in
+            switch result {
+            case .success(let response):
+                self.categories = response.menuList
+                self.collectionView.reloadData() // Обновите коллекцию
+            case .failure(let error):
+                print("Ошибка получения данных: \(error)")
+            }
+        }
+
+
     }
     
     private func setupViews() {
@@ -42,7 +58,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            collectionView.heightAnchor.constraint(equalToConstant: 100) // Установите желаемую высоту
+            collectionView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
 
@@ -86,14 +102,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     //MARK: - Horizontal collection view
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCell", for: indexPath) as! HorizontalCollectionViewCell
-        
+        cell.layer.cornerRadius = 10
 
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 150, height: 150)
     }
 
 }

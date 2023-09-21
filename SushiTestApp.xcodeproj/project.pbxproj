@@ -16,6 +16,9 @@
 		3A6D9ADB2ABC184E00DEC2E1 /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D9ADA2ABC184E00DEC2E1 /* BasketViewController.swift */; };
 		3A6D9ADD2ABC18D100DEC2E1 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D9ADC2ABC18D100DEC2E1 /* InfoViewController.swift */; };
 		3A6D9AE12ABC275D00DEC2E1 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D9AE02ABC275D00DEC2E1 /* HorizontalCollectionViewCell.swift */; };
+		3A6D9AE52ABC2F9900DEC2E1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D9AE42ABC2F9900DEC2E1 /* Model.swift */; };
+		3A6D9AE82ABC309A00DEC2E1 /* CategoryApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D9AE72ABC309A00DEC2E1 /* CategoryApiCaller.swift */; };
+		3A6D9AEB2ABC321500DEC2E1 /* getImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D9AEA2ABC321500DEC2E1 /* getImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		3A6D9ADA2ABC184E00DEC2E1 /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
 		3A6D9ADC2ABC18D100DEC2E1 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		3A6D9AE02ABC275D00DEC2E1 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
+		3A6D9AE42ABC2F9900DEC2E1 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		3A6D9AE72ABC309A00DEC2E1 /* CategoryApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryApiCaller.swift; sourceTree = "<group>"; };
+		3A6D9AEA2ABC321500DEC2E1 /* getImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 		3A6D9AC32ABC159400DEC2E1 /* SushiTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				3A6D9AE92ABC320800DEC2E1 /* Extensions */,
+				3A6D9AE62ABC308900DEC2E1 /* Networking */,
+				3A6D9AE32ABC2F8B00DEC2E1 /* Model */,
 				3A6D9AC42ABC159400DEC2E1 /* AppDelegate.swift */,
 				3A6D9AC62ABC159400DEC2E1 /* SceneDelegate.swift */,
 				3A6D9ADF2ABC1D1500DEC2E1 /* Navigation */,
@@ -98,6 +107,30 @@
 				3A6D9AE02ABC275D00DEC2E1 /* HorizontalCollectionViewCell.swift */,
 			);
 			path = ColecctionViewCells;
+			sourceTree = "<group>";
+		};
+		3A6D9AE32ABC2F8B00DEC2E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A6D9AE42ABC2F9900DEC2E1 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3A6D9AE62ABC308900DEC2E1 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3A6D9AE72ABC309A00DEC2E1 /* CategoryApiCaller.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		3A6D9AE92ABC320800DEC2E1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A6D9AEA2ABC321500DEC2E1 /* getImage.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,10 +206,13 @@
 				3A6D9ADB2ABC184E00DEC2E1 /* BasketViewController.swift in Sources */,
 				3A6D9AC92ABC159400DEC2E1 /* HomeViewController.swift in Sources */,
 				3A6D9AE12ABC275D00DEC2E1 /* HorizontalCollectionViewCell.swift in Sources */,
+				3A6D9AE82ABC309A00DEC2E1 /* CategoryApiCaller.swift in Sources */,
 				3A6D9AD92ABC17E900DEC2E1 /* TabBarAndNavigationController.swift in Sources */,
 				3A6D9AC52ABC159400DEC2E1 /* AppDelegate.swift in Sources */,
+				3A6D9AEB2ABC321500DEC2E1 /* getImage.swift in Sources */,
 				3A6D9ADD2ABC18D100DEC2E1 /* InfoViewController.swift in Sources */,
 				3A6D9AC72ABC159400DEC2E1 /* SceneDelegate.swift in Sources */,
+				3A6D9AE52ABC2F9900DEC2E1 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

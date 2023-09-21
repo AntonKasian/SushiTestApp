@@ -22,8 +22,6 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        // Установи размер и цвет ячейки
-        self.frame = CGRect(x: 0, y: 0, width: 150, height: 100)
         self.backgroundColor = .red
     }
 }
