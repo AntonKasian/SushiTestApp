@@ -14,8 +14,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     
     var categories: [Category] = []
 
-    
-    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -32,35 +30,37 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         setupNavigationBar()
         setupRightBarButton()
         
-        CategoryApiCaller.shared.getCategories { result in
+        let apiCaller = CategoryApiCaller()
+        apiCaller.getCategories { result in
             switch result {
-            case .success(let response):
-                self.categories = response.menuList
-                self.collectionView.reloadData() // Обновите коллекцию
+            case .success(let categories):
+                
+                self.categories = categories
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             case .failure(let error):
-                print("Ошибка получения данных: \(error)")
+                print("Error: \(error)")
             }
         }
-
-
     }
     
     private func setupViews() {
         view.backgroundColor = backColor
-
         view.addSubview(collectionView)
 
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(HorizontalCollectionViewCell.self, forCellWithReuseIdentifier: "HorizontalCell")
-        
+
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            collectionView.heightAnchor.constraint(equalToConstant: 150)
+            collectionView.heightAnchor.constraint(equalToConstant: 180)
         ])
     }
+
 
     
     //MARK: - NavigationView
@@ -108,12 +108,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCell", for: indexPath) as! HorizontalCollectionViewCell
         cell.layer.cornerRadius = 10
+        
+        let category = categories[indexPath.item]
+        cell.configure(with: category)
 
         return cell
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150)
+        return CGSize(width: 150, height: 180)
     }
 
 }

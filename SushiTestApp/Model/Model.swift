@@ -9,12 +9,12 @@ import Foundation
 
 struct CategoryResponse: Codable {
     let status: Bool
-    let menuList: [Category] // Обратите внимание, что menuList соответствует JSON-ключу
+    var menuList: [Category] 
 }
 
 struct Category: Codable {
     let menuID: String
-    let image: String
+    var image: String
     let name: String
     let subMenuCount: Int
 }

@@ -5,35 +5,44 @@
 //  Created by Anton on 21.09.23.
 //
 
-import UIKit
+import Foundation
 
-final class CategoryApiCaller {
-    static let shared = CategoryApiCaller()
+class CategoryApiCaller {
+    private let baseURL = "https://vkus-sovet.ru/api"
     
-    struct Constant {
-        static let categoryAPIURL = URL(string: "https://vkus-sovet.ru/api/getMenu.php")
-    }
-    
-    private init() {}
-    
-    public func getCategories(completion: @escaping (Result<CategoryResponse, Error>) -> Void) { // Измените тип результата на CategoryResponse
-        guard let url = Constant.categoryAPIURL else { return }
-
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    completion(.failure(error))
-                } else if let data = data {
-                    do {
-                        let response = try JSONDecoder().decode(CategoryResponse.self, from: data) // Декодируйте CategoryResponse
-                        completion(.success(response))
-                    } catch {
-                        completion(.failure(error))
-                    }
-                }
+    func getCategories(completion: @escaping (Result<[Category], Error>) -> Void) {
+        guard let url = URL(string: "\(baseURL)/getMenu.php") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data received", code: 0, userInfo: nil)))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(CategoryResponse.self, from: data)
+                let categories = response.menuList
+                completion(.success(categories))
+            } catch {
+                completion(.failure(error))
             }
         }
         task.resume()
     }
 }
+
+
+
+
 
