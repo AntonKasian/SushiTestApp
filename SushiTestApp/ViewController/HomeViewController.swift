@@ -68,13 +68,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         verticalCollectionView.register(VerticalCollectionViewCell.self, forCellWithReuseIdentifier: "VerticalCell")
 
         NSLayoutConstraint.activate([
-            horizontalCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            horizontalCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             horizontalCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             horizontalCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             horizontalCollectionView.heightAnchor.constraint(equalToConstant: 160),
             
             verticalCollectionView.leadingAnchor.constraint(equalTo: horizontalCollectionView.leadingAnchor),
-            verticalCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            verticalCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             verticalCollectionView.topAnchor.constraint(equalTo: horizontalCollectionView.bottomAnchor, constant: 10),
             verticalCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
@@ -153,6 +153,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             return CGSize(width: 170, height: 300)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == horizontalCollectionView {
+            let cell = collectionView.cellForItem(at: indexPath) as? HorizontalCollectionViewCell
+            cell?.isSelected.toggle()
+            
+            if cell?.isSelected == true {
+                print("Horizontal tapped")
+            }
+        }
+    }
+
     
 }
 

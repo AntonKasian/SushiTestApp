@@ -10,6 +10,7 @@ import UIKit
 class HorizontalCollectionViewCell: UICollectionViewCell {
     
     let cellColor = #colorLiteral(red: 0.258012116, green: 0.2628343999, blue: 0.2671281695, alpha: 1)
+    let cellTapColor = #colorLiteral(red: 0.2739130855, green: 0.3876160979, blue: 1, alpha: 1)
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -25,8 +26,12 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.numberOfLines = 2 // Разрешаем две строки текста
+        label.textAlignment = .center // Выравнивание текста по центру
+        label.widthAnchor.constraint(equalToConstant: 110).isActive = true // Ограничение ширины в 100 точках
         return label
     }()
+
     
     let subMenuCountLabel: UILabel = {
         let label = UILabel()
@@ -59,12 +64,22 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6),
             
-            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
             nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            subMenuCountLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 15),
+            subMenuCountLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
             subMenuCountLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
+    }
+
+    func configureSelection(isSelected: Bool) {
+        backgroundColor = isSelected ? cellTapColor : cellColor
+    }
+
+    override var isSelected: Bool {
+        didSet {
+            configureSelection(isSelected: isSelected)
+        }
     }
 
     
