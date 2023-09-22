@@ -12,6 +12,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     let backColor = #colorLiteral(red: 0.1411764324, green: 0.1411764324, blue: 0.1411764324, alpha: 1)
     
     var categories: [Category] = []
+    var selectedCategoryDishes: [MenuItem] = []
+    let dishesApiCaller = DishesApiCaller()
+
 
     private let horizontalCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -120,16 +123,22 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == verticalCollectionView {
-            return 10
+            return selectedCategoryDishes.count
         } else {
-            
             return categories.count
         }
     }
 
 
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == horizontalCollectionView {
+        if collectionView == verticalCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath) as! VerticalCollectionViewCell
+            
+            let dish = selectedCategoryDishes[indexPath.item]
+            cell.configure(with: dish)
+            return cell
+        } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCell", for: indexPath) as! HorizontalCollectionViewCell
             cell.layer.cornerRadius = 10
             
@@ -137,13 +146,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             cell.configure(with: category)
             
             return cell
-        } else if collectionView == verticalCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath) as! VerticalCollectionViewCell
-            return cell
         }
-
-        return UICollectionViewCell()
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -156,6 +161,20 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == horizontalCollectionView {
+            let category = categories[indexPath.item]
+            
+            dishesApiCaller.getDishes(for: category.menuID) { [weak self] result in
+                switch result {
+                case .success(let dishes):
+                    self?.selectedCategoryDishes = dishes
+                    DispatchQueue.main.async {
+                        self?.verticalCollectionView.reloadData()
+                    }
+                case .failure(let error):
+                    print("Error fetching dishes: \(error)")
+                }
+            }
+            
             let cell = collectionView.cellForItem(at: indexPath) as? HorizontalCollectionViewCell
             cell?.isSelected.toggle()
             
@@ -164,7 +183,5 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             }
         }
     }
-
-    
 }
 
