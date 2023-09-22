@@ -20,6 +20,7 @@
 		3A6D9AE82ABC309A00DEC2E1 /* CategoryApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D9AE72ABC309A00DEC2E1 /* CategoryApiCaller.swift */; };
 		3A6D9AEB2ABC321500DEC2E1 /* getImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D9AEA2ABC321500DEC2E1 /* getImage.swift */; };
 		3A6D9AED2ABC69BD00DEC2E1 /* VerticalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D9AEC2ABC69BD00DEC2E1 /* VerticalCollectionViewCell.swift */; };
+		3ADFE1A32ABD76FB008C9D47 /* DishesApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADFE1A22ABD76FB008C9D47 /* DishesApiCaller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		3A6D9AE72ABC309A00DEC2E1 /* CategoryApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryApiCaller.swift; sourceTree = "<group>"; };
 		3A6D9AEA2ABC321500DEC2E1 /* getImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getImage.swift; sourceTree = "<group>"; };
 		3A6D9AEC2ABC69BD00DEC2E1 /* VerticalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCollectionViewCell.swift; sourceTree = "<group>"; };
+		3ADFE1A22ABD76FB008C9D47 /* DishesApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishesApiCaller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				3A6D9AE72ABC309A00DEC2E1 /* CategoryApiCaller.swift */,
+				3ADFE1A22ABD76FB008C9D47 /* DishesApiCaller.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				3A6D9AEB2ABC321500DEC2E1 /* getImage.swift in Sources */,
 				3A6D9ADD2ABC18D100DEC2E1 /* InfoViewController.swift in Sources */,
 				3A6D9AC72ABC159400DEC2E1 /* SceneDelegate.swift in Sources */,
+				3ADFE1A32ABD76FB008C9D47 /* DishesApiCaller.swift in Sources */,
 				3A6D9AE52ABC2F9900DEC2E1 /* Model.swift in Sources */,
 				3A6D9AED2ABC69BD00DEC2E1 /* VerticalCollectionViewCell.swift in Sources */,
 			);
