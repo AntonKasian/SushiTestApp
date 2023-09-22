@@ -10,12 +10,10 @@ import UIKit
 class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     let backColor = #colorLiteral(red: 0.1411764324, green: 0.1411764324, blue: 0.1411764324, alpha: 1)
-    
     var categories: [Category] = []
     var selectedCategoryDishes: [MenuItem] = []
     var selectedCategory: Category?
     let dishesApiCaller = DishesApiCaller()
-
 
     private let horizontalCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -68,6 +66,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         }
     }
     
+    //MARK: - Constraints
+    
     private func setupViews() {
         view.backgroundColor = backColor
         view.addSubview(horizontalCollectionView)
@@ -119,7 +119,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         navigationItem.leftBarButtonItem = customBarButtonItem
     }
 
-    
     private func setupRightBarButton() {
         let phoneImage = UIImage(systemName: "phone")?.withTintColor(.label, renderingMode: .alwaysOriginal)
         
@@ -145,8 +144,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             return categories.count
         }
     }
-
-
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == verticalCollectionView {
@@ -198,6 +195,5 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             cell?.isSelected.toggle()
         }
     }
-
 }
 

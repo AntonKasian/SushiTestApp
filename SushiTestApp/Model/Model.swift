@@ -17,8 +17,6 @@ struct MenuItemsResponse: Codable {
     var menuList: [MenuItem]
 }
 
-
-
 struct Category: Codable {
     let menuID: String
     var image: String
@@ -34,7 +32,6 @@ struct MenuItem: Codable {
     let content: String
     let price: String
     let weight: String
-    // Добавляем новое свойство spicy
     let spicy: String?
 }
 

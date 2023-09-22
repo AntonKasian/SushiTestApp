@@ -10,7 +10,6 @@ import UIKit
 class VerticalCollectionViewCell: UICollectionViewCell {
     
     let backColor = #colorLiteral(red: 0.1411764324, green: 0.1411764324, blue: 0.1411764324, alpha: 1)
-    
     let priceAndWeightLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -20,7 +19,7 @@ class VerticalCollectionViewCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Магура спайси"
+        label.text = "Loading..."
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textAlignment = .center
@@ -30,27 +29,17 @@ class VerticalCollectionViewCell: UICollectionViewCell {
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Тунец, соус спайси"
+        label.text = "Description..."
         label.numberOfLines = 0
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 13)
         label.textAlignment = .center
         return label
     }()
-    
-    let priceLabel: UILabel = {
-        let label = UILabel()
-        label.text = "100 ₽"
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        return label
-    }()
 
     let weightLabel: UILabel = {
         let label = UILabel()
-        label.text = "/ 50г"
+        label.text = ""
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 15)
         label.textAlignment = .center
@@ -66,7 +55,7 @@ class VerticalCollectionViewCell: UICollectionViewCell {
     }()
     
     let cardImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "highlighter"))
+        let imageView = UIImageView(image: UIImage(systemName: "fork.knife"))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -95,10 +84,8 @@ class VerticalCollectionViewCell: UICollectionViewCell {
         backgroundColor = .black
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        
         addSubview(titleLabel)
         addSubview(descriptionLabel)
-        
         addSubview(priceAndWeightLabel)
         addSubview(flameImageView)
         addSubview(cardImageView)
@@ -108,27 +95,19 @@ class VerticalCollectionViewCell: UICollectionViewCell {
         addSubview(topBackgroundView)
         addSubview(addToCartButton)
         
-        priceAndWeightLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            priceAndWeightLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            priceAndWeightLabel.trailingAnchor.constraint(equalTo: flameImageView.leadingAnchor, constant: 5),
-            priceAndWeightLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-
-        topBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            topBackgroundView.topAnchor.constraint(equalTo: cardImageView.bottomAnchor),
-            topBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            topBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            topBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             titleLabel.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        priceAndWeightLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            priceAndWeightLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            priceAndWeightLabel.trailingAnchor.constraint(equalTo: flameImageView.leadingAnchor, constant: 5),
+            priceAndWeightLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
 
         flameImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -138,8 +117,6 @@ class VerticalCollectionViewCell: UICollectionViewCell {
             flameImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
 
-
-        
         cardImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cardImageView.topAnchor.constraint(equalTo: priceAndWeightLabel.bottomAnchor, constant: 5),
@@ -155,9 +132,15 @@ class VerticalCollectionViewCell: UICollectionViewCell {
             addToCartButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
             addToCartButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+        
+        topBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topBackgroundView.topAnchor.constraint(equalTo: cardImageView.bottomAnchor),
+            topBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            topBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            topBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
-
-
 
     override func layoutSubviews() {
         super.layoutSubviews()

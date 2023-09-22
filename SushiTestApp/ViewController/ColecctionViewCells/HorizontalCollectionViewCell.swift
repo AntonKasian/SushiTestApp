@@ -32,7 +32,6 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    
     let subMenuCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -18,8 +18,7 @@ class DishesApiCaller {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
-        // Формируем параметры запроса
+       
         let bodyString = "menuID=\(menuID)"
         request.httpBody = bodyString.data(using: .utf8)
         
