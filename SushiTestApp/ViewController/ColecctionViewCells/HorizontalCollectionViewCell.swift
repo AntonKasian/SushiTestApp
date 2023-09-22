@@ -26,9 +26,9 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.numberOfLines = 2 // Разрешаем две строки текста
-        label.textAlignment = .center // Выравнивание текста по центру
-        label.widthAnchor.constraint(equalToConstant: 110).isActive = true // Ограничение ширины в 100 точках
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.widthAnchor.constraint(equalToConstant: 110).isActive = true
         return label
     }()
 
