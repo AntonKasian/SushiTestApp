@@ -13,6 +13,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     
     var categories: [Category] = []
     var selectedCategoryDishes: [MenuItem] = []
+    var selectedCategory: Category?
     let dishesApiCaller = DishesApiCaller()
 
 
@@ -24,6 +25,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
+    }()
+    
+    let categoryNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.textColor = .label
+        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private let verticalCollectionView: UICollectionView = {
@@ -60,6 +71,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     private func setupViews() {
         view.backgroundColor = backColor
         view.addSubview(horizontalCollectionView)
+        view.addSubview(categoryNameLabel)
         view.addSubview(verticalCollectionView)
 
         horizontalCollectionView.dataSource = self
@@ -78,9 +90,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             
             verticalCollectionView.leadingAnchor.constraint(equalTo: horizontalCollectionView.leadingAnchor),
             verticalCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            verticalCollectionView.topAnchor.constraint(equalTo: horizontalCollectionView.bottomAnchor, constant: 10),
+            verticalCollectionView.topAnchor.constraint(equalTo: horizontalCollectionView.bottomAnchor, constant: 70),
             verticalCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             verticalCollectionView.heightAnchor.constraint(equalToConstant: 260)
+        ])
+        
+        NSLayoutConstraint.activate([
+            categoryNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            categoryNameLabel.topAnchor.constraint(equalTo: horizontalCollectionView.bottomAnchor, constant: 20)
         ])
     }
 
@@ -88,7 +105,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     
     private func setupNavigationBar() {
         let customView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
-        
         let imageIcon = UIImageView(image: UIImage(systemName: "circle.circle")?.withTintColor(.label, renderingMode: .alwaysOriginal))
         imageIcon.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
         
@@ -163,7 +179,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == horizontalCollectionView {
             let category = categories[indexPath.item]
-            
+            selectedCategory = category
+            categoryNameLabel.text = category.name
+
             dishesApiCaller.getDishes(for: category.menuID) { [weak self] result in
                 switch result {
                 case .success(let dishes):
@@ -175,14 +193,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
                     print("Error fetching dishes: \(error)")
                 }
             }
-            
+
             let cell = collectionView.cellForItem(at: indexPath) as? HorizontalCollectionViewCell
             cell?.isSelected.toggle()
-            
-            if cell?.isSelected == true {
-                print("Horizontal tapped")
-            }
         }
     }
+
 }
 
