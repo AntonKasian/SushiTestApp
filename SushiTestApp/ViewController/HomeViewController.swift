@@ -79,7 +79,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             verticalCollectionView.leadingAnchor.constraint(equalTo: horizontalCollectionView.leadingAnchor),
             verticalCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             verticalCollectionView.topAnchor.constraint(equalTo: horizontalCollectionView.bottomAnchor, constant: 10),
-            verticalCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            verticalCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            verticalCollectionView.heightAnchor.constraint(equalToConstant: 260)
         ])
     }
 
@@ -155,7 +156,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         if collectionView == horizontalCollectionView {
             return CGSize(width: 120, height: 160)
         } else {
-            return CGSize(width: 170, height: 300)
+            return CGSize(width: 170, height: 260)
         }
     }
     

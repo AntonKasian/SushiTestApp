@@ -9,11 +9,21 @@ import UIKit
 
 class VerticalCollectionViewCell: UICollectionViewCell {
     
+    let backColor = #colorLiteral(red: 0.1411764324, green: 0.1411764324, blue: 0.1411764324, alpha: 1)
+    
+    let priceAndWeightLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Магура спайси"
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
@@ -21,8 +31,10 @@ class VerticalCollectionViewCell: UICollectionViewCell {
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Тунец, соус спайси"
+        label.numberOfLines = 0
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = .center
         return label
     }()
     
@@ -31,6 +43,7 @@ class VerticalCollectionViewCell: UICollectionViewCell {
         label.text = "100 ₽"
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
@@ -40,6 +53,7 @@ class VerticalCollectionViewCell: UICollectionViewCell {
         label.text = "/ 50г"
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 15)
+        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
@@ -84,41 +98,99 @@ class VerticalCollectionViewCell: UICollectionViewCell {
         
         addSubview(titleLabel)
         addSubview(descriptionLabel)
-        addSubview(priceLabel)
-        addSubview(weightLabel)
+        
+        addSubview(priceAndWeightLabel)
         addSubview(flameImageView)
         addSubview(cardImageView)
+
+        let topBackgroundView = UIView()
+        topBackgroundView.backgroundColor = backColor
+        addSubview(topBackgroundView)
         addSubview(addToCartButton)
+        
+        priceAndWeightLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            priceAndWeightLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            priceAndWeightLabel.trailingAnchor.constraint(equalTo: flameImageView.leadingAnchor, constant: 5),
+            priceAndWeightLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+
+        topBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topBackgroundView.topAnchor.constraint(equalTo: cardImageView.bottomAnchor),
+            topBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            topBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            topBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            titleLabel.heightAnchor.constraint(equalToConstant: 20)
+        ])
+
+        flameImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            flameImageView.leadingAnchor.constraint(equalTo: priceAndWeightLabel.trailingAnchor, constant: 5),
+            flameImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            flameImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+
+
+        
+        cardImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cardImageView.topAnchor.constraint(equalTo: priceAndWeightLabel.bottomAnchor, constant: 5),
+            cardImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            cardImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            cardImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30)
+        ])
+        
+        addToCartButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            addToCartButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            addToCartButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            addToCartButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            addToCartButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
+
+
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        // Устанавливаем фреймы элементов напрямую
-        titleLabel.frame = CGRect(x: 10, y: 10, width: frame.width - 20, height: 20)
-        descriptionLabel.frame = CGRect(x: 10, y: titleLabel.frame.maxY + 2, width: frame.width - 20, height: 15)
-        priceLabel.frame = CGRect(x: 10, y: descriptionLabel.frame.maxY + 25, width: frame.width / 2 - 20, height: 20)
-        weightLabel.frame = CGRect(x: priceLabel.frame.width + 8, y: descriptionLabel.frame.maxY + 25, width: frame.width / 2 - 20, height: 20)
-
-        flameImageView.frame = CGRect(x: weightLabel.frame.maxX + 10, y: priceLabel.frame.minY, width: 20, height: 20)
-        cardImageView.frame = CGRect(x: 0, y: priceLabel.frame.maxY + 10, width: frame.width, height: frame.height - 150)
-        addToCartButton.frame = CGRect(x: 10, y: frame.height - 60, width: frame.width - 20, height: 40)
+        descriptionLabel.frame = CGRect(x: 10, y: titleLabel.frame.maxY + 2, width: frame.width - 20, height: 65)
     }
     
     func configure(with menuItem: MenuItem) {
         titleLabel.text = menuItem.name
         descriptionLabel.text = menuItem.content
-        priceLabel.text = "\(menuItem.price)₽"
-        weightLabel.text = menuItem.weight
+        weightLabel.text = "/\(menuItem.weight)"
         
-        // Проверяем, нужно ли показывать картинку flameImageView
+        if let price = Double(menuItem.price) {
+            let priceFormatted = String(format: "%.0f", price)
+            let attributedText = NSMutableAttributedString()
+            attributedText.append(NSAttributedString(string: "\(priceFormatted)₽", attributes: [
+                .foregroundColor: UIColor.white,
+                .font: UIFont.boldSystemFont(ofSize: 15)
+            ]))
+            attributedText.append(NSAttributedString(string: "/\(menuItem.weight)", attributes: [
+                .foregroundColor: UIColor.gray,
+                .font: UIFont.systemFont(ofSize: 15)
+            ]))
+            priceAndWeightLabel.attributedText = attributedText
+        } else {
+            priceAndWeightLabel.text = ""
+        }
+        
         if let spicy = menuItem.spicy, spicy == "Y" {
             flameImageView.isHidden = false
         } else {
             flameImageView.isHidden = true
         }
-        
-        // Загрузка изображения из URL
+
         if let imageUrl = URL(string: "https://vkus-sovet.ru\(menuItem.image)") {
             URLSession.shared.dataTask(with: imageUrl) { [weak self] data, response, error in
                 if let data = data, let image = UIImage(data: data) {
